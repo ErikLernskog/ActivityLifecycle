@@ -22,9 +22,21 @@ public class LifecycleActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         textview = new TextView(this);
-        textview.setText("");
+        if (savedInstanceState != null) {
+            print("onCreate restore");
+            textview.setText(savedInstanceState.getString("LOG"));
+        } else {
+            textview.setText("");
+        }
         setContentView(textview);
         print("onCreate");
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        textview.setText(savedInstanceState.getString("LOG"));
+        print("onRestoreInstanceState");
     }
 
     @Override
@@ -43,6 +55,13 @@ public class LifecycleActivity extends Activity {
     protected void onResume() {
         super.onResume();
         print("onResume");
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        print("onSaveInstanceState");
+        outState.putString("LOG", textview.getText().toString());
+        super.onSaveInstanceState(outState);
     }
 
     @Override
