@@ -33,13 +33,6 @@ public class LifecycleActivity extends Activity {
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        textview.setText(savedInstanceState.getString("LOG"));
-        print("onRestoreInstanceState");
-    }
-
-    @Override
     protected void onStart() {
         super.onStart();
         print("onStart");
@@ -52,9 +45,22 @@ public class LifecycleActivity extends Activity {
     }
 
     @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        textview.setText(savedInstanceState.getString("LOG"));
+        print("onRestoreInstanceState");
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         print("onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        print("onPause");
     }
 
     @Override
@@ -62,12 +68,6 @@ public class LifecycleActivity extends Activity {
         print("onSaveInstanceState");
         outState.putString("LOG", textview.getText().toString());
         super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        print("onPause");
     }
 
     @Override
