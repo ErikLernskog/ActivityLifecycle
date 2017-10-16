@@ -6,6 +6,7 @@ import android.text.format.Time;
 import android.widget.TextView;
 
 public class LifecycleActivity extends Activity {
+
     private TextView textview = null;
 
     private void print(String text) {
